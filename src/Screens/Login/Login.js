@@ -4,6 +4,7 @@ import Landscape from './Landscape'
 import PortraitDesign from './PortraitDesign'
 import SwipeUpDown from 'react-native-swipe-up-down';
 import CategoryList from '../CategoryList';
+import Loader from '../../Components/Loader';
 
 export default function Login({navigation}) {
   const [orientation, setOrientation] = useState("LANDSCAPE");
@@ -45,7 +46,7 @@ export default function Login({navigation}) {
      ):(
       <PortraitDesign onSubmit={onLogin}/>
      )}
-        
+        <Loader />
     </View>
   )
 }

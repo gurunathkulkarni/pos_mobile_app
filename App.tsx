@@ -21,11 +21,13 @@ import 'react-native-gesture-handler';
 // navigation imports
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import SQLite from 'react-native-sqlite-storage';
 import { route } from './src/Utils/Routes';
 import Dashboard from './src/Screens/Dashboard';
 import Splash from './src/Screens/Splash';
 // creating stack navigator
 const Stack = createStackNavigator();
+let db;
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const [orientation, setOrientation] = useState("LANDSCAPE");
@@ -40,18 +42,23 @@ function App(): JSX.Element {
 
       }
     })
-
-  
-
+    db = SQLite.openDatabase(
+      {
+        name: 'sqlite.db',
+        createFromLocation : 1,
+        // location: 'default',
+      }
+    );
+    console.log("db", db);
   }, []);
+
   useEffect(()=>{
     const height = Dimensions.get('window').height
     const width = Dimensions.get('window').width
     if (width < height) {
       setOrientation('PORTRAIT');
     } else {
-      setOrientation("LANDSCAPE")
-
+      setOrientation("LANDSCAPE");
     }
   })
 
